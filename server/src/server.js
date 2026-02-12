@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import planetsRoutes from './routes/planets.routes.js';
+import launchRoutes from './routes/launch.routes.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use('/api/v1/planets', planetsRoutes);
+app.use('/api/v1/launches', launchRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the NASA Project');
