@@ -4,9 +4,12 @@ import Clickable from "../components/Clickable";
 
 const Launch = props => {
   const selectorBody = useMemo(() => {
-    return props.planets?.map(planet => 
-      <option value={planet.kepler_name} key={planet.kepler_name}>{planet.kepler_name}</option>
-    );
+    return props.planets?.map(planet => {
+      const label = planet.kepler_name || planet.name || "Unknown";
+      return (
+        <option value={label} key={label}>{label}</option>
+      );
+    });
   }, [props.planets]);
 
   const today = new Date().toISOString().split("T")[0];
@@ -43,6 +46,15 @@ const Launch = props => {
         <Loading animate small />
       }
     </form>
+      {/* Simple debug / info list showing the fetched planet objects */}
+      <div style={{marginTop: 20}}>
+        <h4>Available Planets</h4>
+        <ul>
+          {props.planets?.map((p, i) => (
+            <li key={i}>{p.kepler_name || p.name || JSON.stringify(p)}</li>
+          ))}
+        </ul>
+      </div>
   </Appear>
 };
 
