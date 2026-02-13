@@ -4,10 +4,12 @@ import cors from 'cors';
 
 import planetsRoutes from './routes/planets.routes.js';
 import launchRoutes from './routes/launch.routes.js';
+import connectDB from './db/connection.js';
 
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
+connectDB();
 
 app.use(cors());
 // app.use((req, res, next) => {
